@@ -24,14 +24,12 @@
         <ImageView
             android:layout_width="@dimen/logo_widht"
             android:layout_height="match_parent"
-            android:src="@drawable/sapir_card_logo"
-            android:id="@+id/imageView" />
+            android:src="@drawable/sapir_card_logo" />
 
         <ImageView
             android:layout_width="@dimen/logo_widht"
             android:layout_height="@dimen/logo_height"
-            android:src="@drawable/sapir_card1"
-            android:id="@+id/imageView6" />
+            android:src="@drawable/sapir_card1" />
 
     </LinearLayout>
 
