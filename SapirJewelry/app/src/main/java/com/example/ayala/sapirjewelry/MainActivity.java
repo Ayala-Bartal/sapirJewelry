@@ -1,5 +1,6 @@
 package com.example.ayala.sapirjewelry;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                    Intent intent = new Intent(MainActivity.this, ShopActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -45,14 +47,8 @@ public class MainActivity extends AppCompatActivity {
         club.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RegisterFragment registerFragment = RegisterFragment.newInstance();
-                android.app.FragmentManager manager = getFragmentManager();
-                android.app.FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_container, registerFragment, REGISTER_FRAGMENT_TAG);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-               /* RegisterFragment registerFragment = new RegisterFragment();
-                MainActivity.this.getFragmentManager().beginTransaction().replace(R.id.fragment_container, registerFragment, REGISTER_FRAGMENT_TAG).addToBackStack(null).commit();*/
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
 
