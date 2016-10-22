@@ -1,10 +1,12 @@
 package com.example.ayala.sapirjewelry;
 
+import java.io.Serializable;
+
 /**
  * Created by ayala on 10/16/2016.
  */
 
-public class Customers {
+public class Customers implements Serializable{
 
     protected String firstName;
     protected String lastName;
@@ -60,4 +62,15 @@ public class Customers {
     public void setWeddingDate(String weddingDate) {
         this.weddingDate = weddingDate;
     }
+
+    @Override
+    public String toString() {
+        return "UserDbE " +
+                     "[firstName=" + firstName + ", lastName=" + lastName + ", email=" + email +
+                     ", phoneNumber=" + phoneNumber + ", birthday=" + birthday +
+                     ", weddingDate=" + weddingDate
+                + "]";
+    }
+
+
 }

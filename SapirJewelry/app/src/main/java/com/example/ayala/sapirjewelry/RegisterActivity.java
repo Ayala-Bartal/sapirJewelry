@@ -140,22 +140,22 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Customers> call, Response<Customers> response) {
                         if (response.isSuccessful()) {
-                            Customers serverCustomer = response.body();
+                        Customers serverCustomer = response.body();
 
-                            firstName.setText(serverCustomer.getFirstName());
-                            familyName.setText(serverCustomer.getLastName());
-                            phoneNumber.setText(serverCustomer.getPhoneNumber());
-                            emailAddress.setText(serverCustomer.getEmail());
-                            try{
-                                birthday.setText(serverCustomer.getBirthday());
-                                weddingDate.setText(serverCustomer.getWeddingDate());
-                            }catch(Exception e){
-                                e.getMessage();
-                            }
-                        } else {
-                            System.out.println("response.errorBody: " + response.errorBody() + " call:" + call);
+                        firstName.setText(serverCustomer.getFirstName());
+                        familyName.setText(serverCustomer.getLastName());
+                        phoneNumber.setText(serverCustomer.getPhoneNumber());
+                        emailAddress.setText(serverCustomer.getEmail());
+                        try{
+                            birthday.setText(serverCustomer.getBirthday());
+                            weddingDate.setText(serverCustomer.getWeddingDate());
+                        }catch(Exception e){
+                            e.getMessage();
                         }
+                    } else {
+                        System.out.println("response.errorBody: " + response.errorBody() + " call:" + call);
                     }
+                }
 
                     @Override
                     public void onFailure(Call<Customers> call, Throwable t) {

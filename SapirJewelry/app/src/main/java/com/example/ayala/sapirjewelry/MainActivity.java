@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         colaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NewColectionActivity.class);
+                startActivity(intent);
 
             }
         });
