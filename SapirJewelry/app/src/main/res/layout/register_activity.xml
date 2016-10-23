@@ -205,13 +205,7 @@
                     android:text="הרשם"
                     android:id="@+id/register_btn"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/texr_size"
-                    android:text="קבלת נתונים"
-                    android:id="@+id/register_get_btn"/>
+
             </LinearLayout>
 
 

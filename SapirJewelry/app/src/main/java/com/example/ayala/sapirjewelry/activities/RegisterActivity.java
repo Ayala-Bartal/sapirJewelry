@@ -80,48 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        Button get_btn = (Button)findViewById(R.id.register_get_btn);
-        get_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SapirServerAPiI sapirServer = SapirFactory.create("http://192.168.1.4:8082");
-                Call<Customers> callback1 = sapirServer.getUser(firstName.getText().toString());
-
-                callback1.enqueue(new Callback<Customers>() {
-                    @Override
-                    public void onResponse(Call<Customers> call, Response<Customers> response) {
-                        if (response.isSuccessful()) {
-                        Customers serverCustomer = response.body();
-
-                        firstName.setText(serverCustomer.getFirstName());
-                        familyName.setText(serverCustomer.getLastName());
-                        phoneNumber.setText(serverCustomer.getPhoneNumber());
-                        emailAddress.setText(serverCustomer.getEmail());
-                        try{
-                            birthday.setText(serverCustomer.getBirthday());
-                            weddingDate.setText(serverCustomer.getWeddingDate());
-                        }catch(Exception e){
-                            e.getMessage();
-                        }
-                    } else {
-                        System.out.println("response.errorBody: " + response.errorBody() + " call:" + call);
-                    }
-                }
-
-                    @Override
-                    public void onFailure(Call<Customers> call, Throwable t) {
-                        System.out.println("Throwable: " + t + " call:" + call);
-                    }
-                });
-                try {
-                    callback1.execute();
-                    //  Customers serverCustomers = serverResponce.body();
-                    //   System.out.println("serverResponce: " + serverCustomers);
-                } catch (Exception e) {
-                    System.out.println("e.getMessage(): " + e);
-                }
-            }
-        });
 
     }
     private void getCalender (final TextView result){
