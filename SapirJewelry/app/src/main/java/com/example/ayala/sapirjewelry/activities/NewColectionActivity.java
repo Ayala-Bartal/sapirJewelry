@@ -42,7 +42,7 @@ public class NewColectionActivity extends AppCompatActivity{
         return recyclerView;
     }
     private void putUserInView (){
-        SapirServerAPiI sapirServer = SapirFactory.create("http://192.168.1.5:8082");
+        SapirServerAPiI sapirServer = SapirFactory.create("http://192.168.1.5:8082/");
         Call<Collection<Customers>> callback1 = sapirServer.getAllUsersNames();
         callback1.enqueue(getCallBack());
         try {

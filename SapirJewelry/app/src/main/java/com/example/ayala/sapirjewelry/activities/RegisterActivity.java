@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         weddingDate = (TextView) findViewById(R.id.input_wedding_date);
 
-        sapirServerApi = SapirFactory.create("http://192.168.1.5:8082");
+        sapirServerApi = SapirFactory.create("http://192.168.1.5:8082/");
 
 
         Button bithday_btn = (Button) findViewById(R.id.birtday_btn);

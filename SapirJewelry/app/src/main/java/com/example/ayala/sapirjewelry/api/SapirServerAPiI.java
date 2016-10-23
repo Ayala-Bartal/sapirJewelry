@@ -16,13 +16,13 @@ import retrofit2.http.Path;
 
 public interface SapirServerAPiI {
 
-    @GET("/")
+    @GET("/users/")
     Call<Collection<Customers>> getAllUsersNames();
 
-    @GET("/{name}")
+    @GET("/users/{name}")
     Call<Customers> getUser(@Path("name") String name);
 
     //	 @FormUrlEncoded
-    @POST("/")
+    @POST("/users/")
     Call<Customers> postUser(@Body Customers user);
 }
