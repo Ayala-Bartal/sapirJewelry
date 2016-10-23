@@ -115,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
         try {
             executer.execute();
         } catch (Exception e) {
-            System.out.println("e.getMessage(): " + e);
+            toast(e.getMessage());
         }
     }
 
@@ -127,14 +127,17 @@ public class RegisterActivity extends AppCompatActivity {
                     Customers serverCustomers = response.body();
                     response.toString();
                 } else {
-                    System.out.println("response.errorBody: " + response.errorBody() + " call:" + call);
+                    toast(response.errorBody()+"");
                 }
             }
             @Override
             public void onFailure(Call<Customers> call, Throwable t) {
-                System.out.println("Throwable: " + t + " call:" + call);
+                toast(t.getMessage());
             }
         };
         return result;
+    }
+    private void toast (String text){
+        Toast.makeText(RegisterActivity.this, text, Toast.LENGTH_LONG).show();
     }
 }

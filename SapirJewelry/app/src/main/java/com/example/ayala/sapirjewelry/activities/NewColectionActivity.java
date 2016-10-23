@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.ayala.sapirjewelry.entities.Customers;
 import com.example.ayala.sapirjewelry.adapters.CustomersAdapter;
@@ -47,7 +48,7 @@ public class NewColectionActivity extends AppCompatActivity{
         try {
             callback1.execute();
         } catch (Exception e) {
-            System.out.println("e.getMessage(): " + e);
+            toast(e.getMessage()); //TODO
         }
     }
     private Callback getCallBack (){
@@ -63,15 +64,19 @@ public class NewColectionActivity extends AppCompatActivity{
                     CustomersAdapter adapter = new CustomersAdapter((List<Customers>) lstCustomers);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    System.out.println("response.errorBody: " + response.errorBody() + " call:" + call);
+                    toast(response.errorBody()+""); //TODO
                 }
             }
             @Override
             public void onFailure(Call<Collection<Customers>> call, Throwable t) {
-                System.out.println("Throwable: " + t + " call:" + call);
+                toast(t.getMessage()+"");
             }
         };
         return result;
+    }
+
+    private void toast (String text){
+        Toast.makeText(NewColectionActivity.this, text, Toast.LENGTH_LONG).show();
     }
 }
 
