@@ -14,7 +14,7 @@ import retrofit2.http.Path;
  * Created by ayala on 10/16/2016.
  */
 
-public interface SapirServerAPiI {
+public interface ServerUsersAPiI {
 
     @GET("/users/")
     Call<Collection<Customers>> getAllUsersNames();

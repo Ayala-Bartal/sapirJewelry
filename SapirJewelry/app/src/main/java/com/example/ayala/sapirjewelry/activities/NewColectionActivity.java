@@ -11,7 +11,7 @@ import com.example.ayala.sapirjewelry.entities.Customers;
 import com.example.ayala.sapirjewelry.adapters.CustomersAdapter;
 import com.example.ayala.sapirjewelry.R;
 import com.example.ayala.sapirjewelry.api.SapirFactory;
-import com.example.ayala.sapirjewelry.api.SapirServerAPiI;
+import com.example.ayala.sapirjewelry.api.ServerUsersAPiI;
 
 import java.util.Collection;
 import java.util.List;
@@ -42,8 +42,8 @@ public class NewColectionActivity extends AppCompatActivity{
         return recyclerView;
     }
     private void putUserInView (){
-        SapirServerAPiI sapirServer = SapirFactory.create("http://192.168.1.5:8082/");
-        Call<Collection<Customers>> callback1 = sapirServer.getAllUsersNames();
+        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi("http://192.168.1.5:8082/");
+        Call<Collection<Customers>> callback1 = serverUsersApi.getAllUsersNames();
         callback1.enqueue(getCallBack());
         try {
             callback1.execute();

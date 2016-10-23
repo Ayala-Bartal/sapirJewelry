@@ -8,19 +8,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SapirFactory {
 
-    public static SapirServerAPiI create (String apiUrl) {
-        GsonConverterFactory gsonConverterFactory = GsonConverterFactory.create();
-        return create (apiUrl, gsonConverterFactory);
+    public static ServerUsersAPiI createUsersApi(String apiUrl) {
+        GsonConverterFactory jsonConverter = GsonConverterFactory.create();
+        Retrofit retrofit  = createRetrofit(apiUrl, jsonConverter);
+        ServerUsersAPiI sapirServer = retrofit.create(ServerUsersAPiI.class);
+        return sapirServer;
     }
 
-    public static SapirServerAPiI create(String apiUrl, Factory  jsonConverter) {
-
+    private static Retrofit createRetrofit(String apiUrl, Factory  jsonConverter){
         Retrofit retrofit  = new Retrofit.Builder().baseUrl(apiUrl)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(jsonConverter)
                 .build();
-        SapirServerAPiI sapirServer = retrofit.create(SapirServerAPiI.class);
-        return sapirServer;
+        return  retrofit;
     }
 }
 

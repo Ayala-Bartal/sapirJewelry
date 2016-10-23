@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.ayala.sapirjewelry.entities.Customers;
 import com.example.ayala.sapirjewelry.R;
 import com.example.ayala.sapirjewelry.api.SapirFactory;
-import com.example.ayala.sapirjewelry.api.SapirServerAPiI;
+import com.example.ayala.sapirjewelry.api.ServerUsersAPiI;
 
 import java.util.Calendar;
 
@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText emailAddress;
     TextView birthday;
     TextView weddingDate;
-    SapirServerAPiI sapirServerApi;
+    ServerUsersAPiI serverUsersApi;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         weddingDate = (TextView) findViewById(R.id.input_wedding_date);
 
-        sapirServerApi = SapirFactory.create("http://192.168.1.5:8082/");
+        serverUsersApi = SapirFactory.createUsersApi("http://192.168.1.5:8082/");
 
 
         Button bithday_btn = (Button) findViewById(R.id.birtday_btn);
@@ -110,7 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     private void sendCustomerToServer(Customers customer){
-        Call<Customers> executer = sapirServerApi.postUser(customer);
+        Call<Customers> executer = serverUsersApi.postUser(customer);
         executer.enqueue(getCreateCustemerCallBack());
         try {
             executer.execute();
