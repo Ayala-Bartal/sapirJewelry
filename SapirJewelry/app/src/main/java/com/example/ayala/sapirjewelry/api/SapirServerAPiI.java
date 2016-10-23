@@ -1,4 +1,6 @@
-package com.example.ayala.sapirjewelry;
+package com.example.ayala.sapirjewelry.api;
+
+import com.example.ayala.sapirjewelry.entities.Customers;
 
 import java.util.Collection;
 

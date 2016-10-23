@@ -1,4 +1,4 @@
-package com.example.ayala.sapirjewelry;
+package com.example.ayala.sapirjewelry.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.ayala.sapirjewelry.R;
+import com.example.ayala.sapirjewelry.entities.Country;
 
 import java.util.List;
 

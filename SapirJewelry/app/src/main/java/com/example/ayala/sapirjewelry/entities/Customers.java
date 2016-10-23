@@ -1,4 +1,4 @@
-package com.example.ayala.sapirjewelry;
+package com.example.ayala.sapirjewelry.entities;
 
 import java.io.Serializable;
 

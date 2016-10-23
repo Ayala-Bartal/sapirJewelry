@@ -1,12 +1,14 @@
-package com.example.ayala.sapirjewelry;
+package com.example.ayala.sapirjewelry.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
+
+import com.example.ayala.sapirjewelry.entities.Country;
+import com.example.ayala.sapirjewelry.adapters.CountryAdapter;
+import com.example.ayala.sapirjewelry.R;
 
 import java.util.ArrayList;
 

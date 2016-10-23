@@ -1,4 +1,4 @@
-package com.example.ayala.sapirjewelry;
+package com.example.ayala.sapirjewelry.activities;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -10,6 +10,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ayala.sapirjewelry.entities.Customers;
+import com.example.ayala.sapirjewelry.R;
+import com.example.ayala.sapirjewelry.api.SapirFactory;
+import com.example.ayala.sapirjewelry.api.SapirServerAPiI;
 
 import java.util.Calendar;
 
@@ -29,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText emailAddress;
     TextView birthday;
     TextView weddingDate;
+    SapirServerAPiI sapirServerApi;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,44 +53,21 @@ public class RegisterActivity extends AppCompatActivity {
 
         weddingDate = (TextView) findViewById(R.id.input_wedding_date);
 
+        sapirServerApi = SapirFactory.create("http://192.168.1.5:8082");
+
 
         Button bithday_btn = (Button) findViewById(R.id.birtday_btn);
         bithday_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Calendar current = Calendar.getInstance();
-                int year = current.get(Calendar.YEAR);
-                int month = current.get(Calendar.MONTH);
-                int day = current.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dpd = new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        int a = i1 + 1;
-                        Toast.makeText(RegisterActivity.this, i2 + "/" + (i1 + 1) + "/" + i, Toast.LENGTH_SHORT).show();
-                        birthday.setText(i2 + "/" + a + "/" + i);
-                    }
-                }, year, month, day);
-                dpd.show();
+                getCalender(birthday);
             }
         });
-
 
         Button wedding_day_btn = (Button) findViewById(R.id.wedding_date_btn);
         wedding_day_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar current = Calendar.getInstance();
-                int year = current.get(Calendar.YEAR);
-                int month = current.get(Calendar.MONTH);
-                int day = current.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dpd = new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        int a = i1 + 1;
-                        Toast.makeText(RegisterActivity.this, i2 + "/" + (i1 + 1) + "/" + i, Toast.LENGTH_SHORT).show();
-                        weddingDate.setText(i2 + "/" + a + "/" + i);
-                    }
-                }, year, month, day);
-                dpd.show();
+                getCalender(weddingDate);
             }
         });
 
@@ -92,40 +75,8 @@ public class RegisterActivity extends AppCompatActivity {
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SapirServerAPiI sapirServer = SapirFactory.create("http://192.168.1.4:8082");
-                Customers customers = new Customers();
-                customers.setFirstName(firstName.getText().toString());
-                customers.setLastName(familyName.getText().toString());
-                customers.setPhoneNumber(phoneNumber.getText().toString());
-                customers.setEmail(emailAddress.getText().toString());
-                customers.setBirthday(birthday.getText().toString());
-                customers.setWeddingDate(weddingDate.getText().toString());
-                Call<Customers> callback1 = sapirServer.postUser(customers);
-
-                callback1.enqueue(new Callback<Customers>() {
-                    @Override
-                    public void onResponse(Call<Customers> call, Response<Customers> response) {
-                        if (response.isSuccessful()) {
-                            Customers serverCustomers = response.body();
-                            response.toString();
-                        } else {
-                            System.out.println("response.errorBody: " + response.errorBody() + " call:" + call);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Customers> call, Throwable t) {
-                        System.out.println("Throwable: " + t + " call:" + call);
-                    }
-                });
-                try {
-                    Response<Customers> serverResponce = callback1.execute();
-                    //  Customers serverCustomers = serverResponce.body();
-                    //   System.out.println("serverResponce: " + serverCustomers);
-                } catch (Exception e) {
-                    System.out.println("e.getMessage(): " + e);
-                }
+                Customers customer = getCustomerFromInput();
+                sendCustomerToServer(customer);
             }
         });
 
@@ -172,8 +123,60 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void getCalender (final TextView result){
+        Calendar current = Calendar.getInstance();
+        int year = current.get(Calendar.YEAR);
+        int month = current.get(Calendar.MONTH);
+        int day = current.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dpd = new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                int a = i1 + 1;
+                Toast.makeText(RegisterActivity.this, i2 + "/" + (i1 + 1) + "/" + i, Toast.LENGTH_SHORT).show();
+                result.setText(i2 + "/" + a + "/" + i);
+            }
+        }, year, month, day);
+        dpd.show();
 
+    }
+    private Customers getCustomerFromInput (){
+        Customers customer = new Customers();
+        customer.setFirstName(firstName.getText().toString());
+        customer.setLastName(familyName.getText().toString());
+        customer.setPhoneNumber(phoneNumber.getText().toString());
+        customer.setEmail(emailAddress.getText().toString());
+        customer.setBirthday(birthday.getText().toString());
+        customer.setWeddingDate(weddingDate.getText().toString());
+        return  customer;
 
+    }
+    private void sendCustomerToServer(Customers customer){
+        Call<Customers> executer = sapirServerApi.postUser(customer);
+        executer.enqueue(getCreateCustemerCallBack());
+        try {
+            executer.execute();
+        } catch (Exception e) {
+            System.out.println("e.getMessage(): " + e);
+        }
+    }
 
+    private Callback getCreateCustemerCallBack(){
+        Callback result = new Callback<Customers>() {
+            @Override
+            public void onResponse(Call<Customers> call, Response<Customers> response) {
+                if (response.isSuccessful()) {
+                    Customers serverCustomers = response.body();
+                    response.toString();
+                } else {
+                    System.out.println("response.errorBody: " + response.errorBody() + " call:" + call);
+                }
+            }
+            @Override
+            public void onFailure(Call<Customers> call, Throwable t) {
+                System.out.println("Throwable: " + t + " call:" + call);
+            }
+        };
+        return result;
     }
 }

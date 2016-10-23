@@ -1,4 +1,4 @@
-package com.example.ayala.sapirjewelry;
+package com.example.ayala.sapirjewelry.api;
 
 import retrofit2.Retrofit;
 import retrofit2.Converter.Factory;

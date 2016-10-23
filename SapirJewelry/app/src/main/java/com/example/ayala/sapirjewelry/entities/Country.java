@@ -1,4 +1,4 @@
-package com.example.ayala.sapirjewelry;
+package com.example.ayala.sapirjewelry.entities;
 
 /**
  * Created by ayala on 10/18/2016.
