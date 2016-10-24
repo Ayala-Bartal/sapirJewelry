@@ -1,6 +1,7 @@
 package com.example.ayala.sapirjewelry.api;
 
 import com.example.ayala.sapirjewelry.entities.Customers;
+import com.example.ayala.sapirjewelry.entities.Shop;
 
 import java.util.Collection;
 
@@ -14,14 +15,15 @@ import retrofit2.http.Path;
  * Created by ayala on 10/24/2016.
  */
 
-public interface ServerUsersAPiI {
-    @GET("/users/")
-    Call<Collection<Customers>> getAllUsersNames();
+public interface ServerShopAPiI {
 
-    @GET("/users/{name}")
-    Call<Customers> getUser(@Path("name") String name);
+    @GET("/shop/")
+    Call<Collection<Shop>> getAllShopNames();
+
+    @GET("/shop/{name}")
+    Call<Shop> getUser(@Path("name") String name);
 
     //	 @FormUrlEncoded
-    @POST("/users/")
-    Call<Customers> postUser(@Body Customers user);
+    @POST("/shop/")
+    Call<Shop> postUser(@Body Shop shop);
 }

@@ -5,12 +5,20 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
-import com.example.ayala.sapirjewelry.entities.Country;
-import com.example.ayala.sapirjewelry.adapters.CountryAdapter;
+import com.example.ayala.sapirjewelry.adapters.ShopAdapter;
+import com.example.ayala.sapirjewelry.api.SapirFactory;
+import com.example.ayala.sapirjewelry.api.ServerShopAPiI;
 import com.example.ayala.sapirjewelry.R;
+import com.example.ayala.sapirjewelry.entities.Shop;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by ayala on 10/18/2016.
@@ -18,40 +26,53 @@ import java.util.ArrayList;
 
 public class ShopActivity extends AppCompatActivity {
 
-
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_activity);
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler);
+        recyclerView =getRecylerView();
+        putUserInView();
+        getCallBack();
+    }
+    private RecyclerView getRecylerView (){
+        final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
-
         GridLayoutManager lm = new GridLayoutManager(this,2);
-        //LinearLayoutManager lm = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(lm);
+        return recyclerView;
+    }
+    private void putUserInView (){
+        ServerShopAPiI serverShopAPiI = SapirFactory.createShopsApi("http://192.168.1.7:8082/");
+        Call<Collection<Shop>> callback1 = serverShopAPiI.getAllShopNames();
+        callback1.enqueue(getCallBack());
+    }
+    private Callback getCallBack (){
+        Callback result = new Callback<Collection<Shop>>() {
+            @Override
+            public void onResponse(Call<Collection<Shop>> call, Response<Collection<Shop>> response) {
+                if (response.isSuccessful()) {
+                    Collection<Shop> lstShop = response.body();
+                    for (Shop shop : lstShop){
+                        String strShop = shop.toString();
+                        shop.toString();
+                    }
+                    ShopAdapter adapter = new ShopAdapter((List<Shop>) lstShop);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    toast(response.errorBody()+""); //TODO
+                }
+            }
+            @Override
+            public void onFailure(Call<Collection<Shop>> call, Throwable t) {
+                toast(t.getMessage()+"");
+            }
+        };
+        return result;
+    }
 
-        final ArrayList<Country> countries = new ArrayList<>();
-        countries.add(new Country("China", 99900000, R.drawable.flag_china));
-        countries.add(new Country("Greece", 8858458, R.drawable.flag_greece));
-        countries.add(new Country("Israel", 6000000, R.drawable.flag_israel));
-        countries.add(new Country("Italy", 8000000, R.drawable.flag_italy,true));
-        countries.add(new Country("China",99900000,R.drawable.flag_china));
-        countries.add(new Country("Greece",8858458,R.drawable.flag_greece,true));
-        countries.add(new Country("Israel",6000000,R.drawable.flag_israel,true));
-        countries.add(new Country("Italy",8000000,R.drawable.flag_italy));
-        countries.add(new Country("China",99900000,R.drawable.flag_china,true));
-        countries.add(new Country("Greece",8858458,R.drawable.flag_greece));
-        countries.add(new Country("Israel",6000000,R.drawable.flag_israel));
-        countries.add(new Country("Italy",8000000,R.drawable.flag_italy,true));
-        countries.add(new Country("China",99900000,R.drawable.flag_china,true));
-        countries.add(new Country("Greece",8858458,R.drawable.flag_greece));
-        countries.add(new Country("Israel",6000000,R.drawable.flag_israel));
-        countries.add(new Country("Italy",8000000,R.drawable.flag_italy));
-
-        final CountryAdapter adapter = new CountryAdapter(countries);
-
-        recyclerView.setAdapter(adapter);
-
+    private void toast (String text){
+        Toast.makeText(ShopActivity.this, text, Toast.LENGTH_LONG).show();
     }
 }

@@ -7,8 +7,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.example.ayala.sapirjewelry.entities.Customers;
 import com.example.ayala.sapirjewelry.adapters.CustomersAdapter;
+import com.example.ayala.sapirjewelry.entities.Customers;
 import com.example.ayala.sapirjewelry.R;
 import com.example.ayala.sapirjewelry.api.SapirFactory;
 import com.example.ayala.sapirjewelry.api.ServerUsersAPiI;
@@ -16,6 +16,7 @@ import com.example.ayala.sapirjewelry.api.ServerUsersAPiI;
 import java.util.Collection;
 import java.util.List;
 
+import okhttp3.HttpUrl;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,14 +43,12 @@ public class NewColectionActivity extends AppCompatActivity{
         return recyclerView;
     }
     private void putUserInView (){
-        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi("http://192.168.1.5:8082/");
+        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi("http://192.168.1.7:8082/");
         Call<Collection<Customers>> callback1 = serverUsersApi.getAllUsersNames();
+        HttpUrl url = callback1.request().url();
+        String strURL = url.toString();
+        toast(strURL);
         callback1.enqueue(getCallBack());
-        try {
-            callback1.execute();
-        } catch (Exception e) {
-            toast(e.getMessage()); //TODO
-        }
     }
     private Callback getCallBack (){
         Callback result = new Callback<Collection<Customers>>() {
