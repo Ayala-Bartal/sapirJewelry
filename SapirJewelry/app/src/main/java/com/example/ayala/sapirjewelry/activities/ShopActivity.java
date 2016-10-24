@@ -1,10 +1,15 @@
 package com.example.ayala.sapirjewelry.activities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.ayala.sapirjewelry.adapters.ShopAdapter;
@@ -13,6 +18,7 @@ import com.example.ayala.sapirjewelry.api.ServerShopAPiI;
 import com.example.ayala.sapirjewelry.R;
 import com.example.ayala.sapirjewelry.entities.Shop;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,10 +37,8 @@ public class ShopActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_activity);
-
         recyclerView =getRecylerView();
         putUserInView();
-        getCallBack();
     }
     private RecyclerView getRecylerView (){
         final RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler);
@@ -56,6 +60,16 @@ public class ShopActivity extends AppCompatActivity {
                     Collection<Shop> lstShop = response.body();
                     for (Shop shop : lstShop){
                         String strShop = shop.toString();
+                        getImage(shop);
+                        /*String path = shop.getPicPath();
+                        File imgFile = new  File(path);
+                        if(imgFile.exists()){
+                            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                            shop.setPicView(myBitmap);
+                        }
+                        else {
+                            toast("file not exists");
+                        }*/
                         shop.toString();
                     }
                     ShopAdapter adapter = new ShopAdapter((List<Shop>) lstShop);
@@ -74,5 +88,15 @@ public class ShopActivity extends AppCompatActivity {
 
     private void toast (String text){
         Toast.makeText(ShopActivity.this, text, Toast.LENGTH_LONG).show();
+    }
+
+    private void getImage(Shop shop){
+       //Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.flag_greece);
+        Drawable drawable = getResources().getDrawable(R.drawable.flag_italy);
+        Bitmap mybitmap = ((BitmapDrawable) drawable).getBitmap();
+       shop.setPicView(mybitmap);
+        /*ImageView imageView = null;
+        imageView.setImageResource(R.drawable.flag_italy);
+        shop.setPicView(imageView);*/
     }
 }

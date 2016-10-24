@@ -1,6 +1,7 @@
 package com.example.ayala.sapirjewelry.entities;
 
 import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -14,29 +15,18 @@ public class Shop {
     protected String name;
     protected String picPath;
     protected String contant;
-    transient protected Bitmap picView;
+    protected Bitmap picView;
 
 
     public Shop(String name, String picPath, String contant, Bitmap picView) {
-        super();
         this.name = name;
         this.picPath = picPath;
         this.contant = contant;
         this.picView = picView;
     }
 
-    private void writeObject (ObjectOutputStream oos) throws IOException {
-        if (picView != null) {
-            picView.compress(Bitmap.CompressFormat.JPEG, 70, oos);
-        }
-        oos.defaultWriteObject();
-    }
-
-
     public Bitmap getPicView() {return picView;}
-    public void setPicView(Bitmap picView) {
-        this.picView = picView;
-    }
+    public void setPicView(Bitmap picView) {this.picView = picView;}
     public String getName() {
         return name;
     }
