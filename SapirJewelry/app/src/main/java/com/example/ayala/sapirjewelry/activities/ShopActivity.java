@@ -15,10 +15,6 @@ import com.example.ayala.sapirjewelry.api.SapirFactory;
 import com.example.ayala.sapirjewelry.api.ServerShopAPiI;
 import com.example.ayala.sapirjewelry.R;
 import com.example.ayala.sapirjewelry.entities.Shop;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -45,9 +41,6 @@ public class ShopActivity extends AppCompatActivity {
         setContentView(R.layout.shop_activity);
         recyclerView = getRecylerView();
         putUserInView();
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-    //    m_gClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private RecyclerView getRecylerView() {
@@ -91,9 +84,7 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void getImage(final Shop shop) {
-        String pathName = "http://www.alljobs.co.il/"; //images/HomePage
-        pathName = "http://www.alljobs.co.il/";
-
+        String pathName = "http://www.alljobs.co.il/";
         ServerShopAPiI service = SapirFactory.createShopsApi(pathName);
         Call<ResponseBody> call = service.getImageDetails();
         String strUrl = call.request().url().toString();
@@ -105,18 +96,13 @@ public class ShopActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-
-                    Log.d("onResponse", "Response came from server");
-                    boolean FileDownloaded = downloadImage(response.body(), shop);
-                    Log.d("onResponse", "Image is downloaded and saved ? " + FileDownloaded);
-
+                    downloadImage(response.body(), shop);
                     List<Shop> lstShop = new ArrayList<Shop>();
                     lstShop.add(shop);
                     ShopAdapter adapter = new ShopAdapter((List<Shop>) lstShop);
                     recyclerView.setAdapter(adapter);
                 } catch (Exception e) {
-                    Log.d("onResponse", "There is an error");
-                    e.printStackTrace();
+                   toast(e.getMessage());
                 }
             }
 
@@ -128,22 +114,21 @@ public class ShopActivity extends AppCompatActivity {
         return result;
     }
 
-    private boolean downloadImage (ResponseBody body, Shop shop) {
-        try {
-            InputStream in = body.byteStream();
-            File outFile = getOutFile("a.png");
-            OutputStream out = new FileOutputStream(outFile);
-            org.apache.commons.io.IOUtils.copy(in, out);
-            processLocalImage(shop, outFile);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+    private void downloadImage (ResponseBody body, Shop shop) throws Exception {
+        InputStream inStream = body.byteStream();
+        File outFile = getOutFile("a2.png"); //TODO
+        OutputStream outStream = new FileOutputStream(outFile);
+        org.apache.commons.io.IOUtils.copy(inStream, outStream);
+        processLocalImage(shop, outFile);
     }
     private File getOutFile(String fileName) throws Exception {
         File baseDire = getExternalFilesDir(null);
         File outFile = new File(baseDire + File.separator + fileName);
         boolean bCreateFile = outFile.createNewFile();
+        if (!bCreateFile){
+            //TODO:
+         //   throw new Exception ("Faild to create file: " + outFile);
+        }
         return outFile;
     }
 
