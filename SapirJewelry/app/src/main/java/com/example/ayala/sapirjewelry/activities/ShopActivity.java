@@ -84,7 +84,7 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void getImage(final Shop shop) {
-        String pathName = "http://www.alljobs.co.il/";
+        String pathName = "http://192.168.1.7:8082/";
         ServerShopAPiI service = SapirFactory.createShopsApi(pathName);
         Call<ResponseBody> call = service.getImageDetails();
         String strUrl = call.request().url().toString();
@@ -137,7 +137,7 @@ public class ShopActivity extends AppCompatActivity {
         long nFileSize = outFile.length();
         Bitmap bMap = BitmapFactory.decodeFile(outFile.getAbsolutePath());
         width = 2 * bMap.getWidth();
-        height = 6 * bMap.getHeight();
+        height = 2 * bMap.getHeight();
         Bitmap bMap2 = Bitmap.createScaledBitmap(bMap, width, height, false);
         shop.setPicView(bMap2);
     }
