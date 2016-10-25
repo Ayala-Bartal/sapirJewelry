@@ -86,7 +86,7 @@ public class ShopActivity extends AppCompatActivity {
     private void getImage(final Shop shop) {
         String pathName = "http://192.168.1.7:8082/";
         ServerShopAPiI service = SapirFactory.createShopsApi(pathName);
-        Call<ResponseBody> call = service.getImageDetails();
+        Call<ResponseBody> call = service.getImageDetails(shop.getName());
         String strUrl = call.request().url().toString();
         call.enqueue(getImageCallback(shop));
     }
@@ -116,7 +116,7 @@ public class ShopActivity extends AppCompatActivity {
 
     private void downloadImage (ResponseBody body, Shop shop) throws Exception {
         InputStream inStream = body.byteStream();
-        File outFile = getOutFile("a2.png"); //TODO
+        File outFile = getOutFile(shop.getName()); //TODO
         OutputStream outStream = new FileOutputStream(outFile);
         org.apache.commons.io.IOUtils.copy(inStream, outStream);
         processLocalImage(shop, outFile);

@@ -28,6 +28,6 @@ public interface ServerShopAPiI {
     @POST("/shop/")
     Call<Shop> postUser(@Body Shop shop);
 
-    @GET ("/shop/image/תיקים") //("/180920160803-hr.png/")//180920160803-hr.png
-    Call<ResponseBody> getImageDetails();
+    @GET ("/shop/image/{name}") //("/180920160803-hr.png/")//180920160803-hr.png
+    Call<ResponseBody> getImageDetails(@Path("name") String name);
 }
