@@ -5,6 +5,7 @@ import com.example.ayala.sapirjewelry.entities.Shop;
 
 import java.util.Collection;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -26,4 +27,7 @@ public interface ServerShopAPiI {
     //	 @FormUrlEncoded
     @POST("/shop/")
     Call<Shop> postUser(@Body Shop shop);
+
+    @GET ("/images/HomePage/180920160803-hr.png") //("/180920160803-hr.png/")//180920160803-hr.png
+    Call<ResponseBody> getImageDetails();
 }

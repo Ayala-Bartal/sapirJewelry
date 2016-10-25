@@ -26,7 +26,9 @@ public class Shop {
     }
 
     public Bitmap getPicView() {return picView;}
-    public void setPicView(Bitmap picView) {this.picView = picView;}
+    public void setPicView(Bitmap picView) {
+        this.picView = picView;
+    }
     public String getName() {
         return name;
     }
