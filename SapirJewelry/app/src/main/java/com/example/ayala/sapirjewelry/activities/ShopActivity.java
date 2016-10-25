@@ -10,7 +10,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.example.ayala.sapirjewelry.adapters.ShopAdapter;
 import com.example.ayala.sapirjewelry.api.SapirFactory;
 import com.example.ayala.sapirjewelry.api.ServerShopAPiI;
@@ -20,7 +19,6 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -28,7 +26,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,11 +38,6 @@ import retrofit2.Response;
 public class ShopActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient m_gClient;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +47,7 @@ public class ShopActivity extends AppCompatActivity {
         putUserInView();
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        m_gClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    //    m_gClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private RecyclerView getRecylerView() {
@@ -78,14 +70,9 @@ public class ShopActivity extends AppCompatActivity {
             public void onResponse(Call<Collection<Shop>> call, Response<Collection<Shop>> response) {
                 if (response.isSuccessful()) {
                     Collection<Shop> lstShop = response.body();
-                    Shop shop2 = null;
                     for (Shop shop : lstShop) {
-                        shop2 = shop;
                         getImage(shop);
-                        shop2 = shop;
                     }
-              //      ShopAdapter adapter = new ShopAdapter((List<Shop>) lstShop);
-               //     recyclerView.setAdapter(adapter);
                 } else {
                     toast(response.errorBody() + ""); //TODO
                 }
@@ -168,41 +155,5 @@ public class ShopActivity extends AppCompatActivity {
         height = 6 * bMap.getHeight();
         Bitmap bMap2 = Bitmap.createScaledBitmap(bMap, width, height, false);
         shop.setPicView(bMap2);
-    }
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    public Action getIndexApiAction() {
-        Thing object = new Thing.Builder()
-                .setName("Shop Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
-                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
-                .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        m_gClient.connect();
-        AppIndex.AppIndexApi.start(m_gClient, getIndexApiAction());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        AppIndex.AppIndexApi.end(m_gClient, getIndexApiAction());
-        m_gClient.disconnect();
     }
 }
