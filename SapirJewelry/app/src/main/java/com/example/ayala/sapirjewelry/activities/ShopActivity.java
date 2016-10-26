@@ -22,6 +22,10 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,13 +38,14 @@ import retrofit2.Response;
 public class ShopActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    int m_counter = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shop_activity);
         recyclerView = getRecylerView();
-        putUserInView();
+        putShopsInView();
     }
 
     private RecyclerView getRecylerView() {
@@ -51,21 +56,19 @@ public class ShopActivity extends AppCompatActivity {
         return recyclerView;
     }
 
-    private void putUserInView() {
+    private void putShopsInView() {
         ServerShopAPiI serverShopAPiI = SapirFactory.createShopsApi("http://192.168.1.7:8082/");
         Call<Collection<Shop>> callback1 = serverShopAPiI.getAllShopNames();
-        callback1.enqueue(getCallBack());
+        callback1.enqueue(getShopsCallBack());
     }
 
-    private Callback getCallBack() {
+    private Callback getShopsCallBack() {
         Callback result = new Callback<Collection<Shop>>() {
             @Override
             public void onResponse(Call<Collection<Shop>> call, Response<Collection<Shop>> response) {
                 if (response.isSuccessful()) {
                     Collection<Shop> lstShop = response.body();
-                    for (Shop shop : lstShop) {
-                        getImage(shop);
-                    }
+                    getImages (lstShop);
                 } else {
                     toast(response.errorBody() + ""); //TODO
                 }
@@ -83,24 +86,28 @@ public class ShopActivity extends AppCompatActivity {
         Toast.makeText(ShopActivity.this, text, Toast.LENGTH_LONG).show();
     }
 
-    private void getImage(final Shop shop) {
+    private void getImages (final Collection<Shop> lstShop) { //TODO: remove
+        m_counter = lstShop.size();
+        for(final Shop shop : lstShop){
+            getImage(shop, lstShop);
+        }
+    }
+
+    private void getImage(final Shop shop, final Collection<Shop> lstShop) {
         String pathName = "http://192.168.1.7:8082/";
         ServerShopAPiI service = SapirFactory.createShopsApi(pathName);
         Call<ResponseBody> call = service.getImageDetails(shop.getName());
         String strUrl = call.request().url().toString();
-        call.enqueue(getImageCallback(shop));
+        call.enqueue(getImageCallback(shop, lstShop));
     }
 
-    private Callback getImageCallback(final Shop shop) {
+    private Callback getImageCallback(final Shop shop, final Collection<Shop> lstShop) {
         Callback result = new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     downloadImage(response.body(), shop);
-                    List<Shop> lstShop = new ArrayList<Shop>();
-                    lstShop.add(shop);
-                    ShopAdapter adapter = new ShopAdapter((List<Shop>) lstShop);
-                    recyclerView.setAdapter(adapter);
+                    setImagesInView(lstShop);
                 } catch (Exception e) {
                    toast(e.getMessage());
                 }
@@ -112,6 +119,15 @@ public class ShopActivity extends AppCompatActivity {
             }
         };
         return result;
+    }
+
+    synchronized void setImagesInView (final Collection<Shop> lstShop){
+        m_counter--;
+        if (m_counter>0){
+           return;
+        }
+        ShopAdapter adapter = new ShopAdapter((List<Shop>) lstShop);
+        recyclerView.setAdapter(adapter);
     }
 
     private void downloadImage (ResponseBody body, Shop shop) throws Exception {
