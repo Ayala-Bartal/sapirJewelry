@@ -16,21 +16,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="@dimen/margin">
+        android:background="@color/wite">
 
         <ImageView
             android:layout_width="@dimen/logo_widht"
             android:layout_height="match_parent"
-            android:src="@drawable/sapir_card_logo"
-            android:id="@+id/imageView" />
+            android:src="@drawable/sapir_logo_card"
+            android:id="@+id/imageView"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"/>
 
         <ImageView
             android:layout_width="@dimen/logo_widht"
-            android:layout_height="@dimen/logo_height"
-            android:src="@drawable/sapir_card1"
+            android:layout_height="match_parent"
+            android:src="@drawable/sapir_card1_clipped_rev_1"
             android:id="@+id/imageView6" />
 
     </LinearLayout>
@@ -58,17 +60,16 @@
             android:gravity="center"
             android:layout_weight="2">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="30dp"
                 android:id="@+id/shop_btn">
 
                 <ImageView
-                    android:layout_width="@dimen/dimond_size"
-                    android:layout_height="@dimen/dimond_size"
-                    android:src="@drawable/doamond" />
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/dimond1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -76,31 +77,30 @@
                     android:text="חנות אינטרנטית"
                     android:textSize="@dimen/texr_size"
                     android:layout_gravity="center"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/new_colaction">
-
-                <ImageView
-                    android:layout_width="@dimen/dimond_size"
-                    android:layout_height="@dimen/dimond_size"
-                    android:src="@drawable/doamond"
-                    android:layout_gravity="center" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="קולקציה חדשה"
-                    android:textSize="@dimen/texr_size"
                     android:textColor="@color/black"
-                    android:layout_gravity="center"/>
+                    android:layout_centerHorizontal="true"/>
 
-            </LinearLayout>
+            </RelativeLayout>
+
+           <RelativeLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/new_colaction">
+
+               <ImageView
+                   android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:src="@drawable/dimond1" />
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="קולקציה חדשה"
+                   android:textSize="@dimen/texr_size"
+                   android:textColor="@color/black"
+                   android:layout_gravity="center"
+                   android:layout_centerHorizontal="true"/>
+           </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -111,17 +111,16 @@
             android:gravity="center"
             android:layout_weight="2">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="30dp"
                 android:id="@+id/sales">
 
                 <ImageView
-                    android:layout_width="@dimen/dimond_size"
-                    android:layout_height="@dimen/dimond_size"
-                    android:src="@drawable/doamond" />
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/dimond1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -129,21 +128,20 @@
                     android:text="מבצעים"
                     android:textSize="@dimen/texr_size"
                     android:layout_gravity="center"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:layout_centerHorizontal="true"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:id="@+id/club">
 
                 <ImageView
-                    android:layout_width="@dimen/dimond_size"
-                    android:layout_height="@dimen/dimond_size"
-                    android:src="@drawable/doamond"
-                    android:layout_gravity="center" />
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/dimond1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -151,19 +149,19 @@
                     android:text="מועדון לקוחות"
                     android:textSize="@dimen/texr_size"
                     android:textColor="@color/black"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    android:layout_centerHorizontal="true"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
-
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.95"
+        android:layout_weight="1.5"
         android:orientation="horizontal"
         android:gravity="center">
 
@@ -187,7 +185,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/margin"
-        android:layout_weight="0.5"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_gravity="center">
 
@@ -196,8 +194,7 @@
             android:layout_height="wrap_content"
             android:text="תפריט"
             android:textSize="@dimen/texr_size"
-            android:textColor="@color/black"
-            />
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"

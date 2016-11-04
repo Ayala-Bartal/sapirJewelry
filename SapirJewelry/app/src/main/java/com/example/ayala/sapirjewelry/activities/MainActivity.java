@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.example.ayala.sapirjewelry.R;
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        LinearLayout shop = (LinearLayout)findViewById(R.id.shop_btn);
+       RelativeLayout shop = (RelativeLayout) findViewById(R.id.shop_btn);
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout colaction = (LinearLayout)findViewById(R.id.new_colaction);
+       RelativeLayout colaction = (RelativeLayout) findViewById(R.id.new_colaction);
         colaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout sales = (LinearLayout)findViewById(R.id.sales);
+        RelativeLayout sales = (RelativeLayout) findViewById(R.id.sales);
         sales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout club = (LinearLayout)findViewById(R.id.club);
+        RelativeLayout club = (RelativeLayout) findViewById(R.id.club);
         club.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
