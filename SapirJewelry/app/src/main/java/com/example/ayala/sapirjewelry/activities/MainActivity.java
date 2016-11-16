@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-       RelativeLayout colaction = (RelativeLayout) findViewById(R.id.new_colaction);
+       RelativeLayout colaction = (RelativeLayout) findViewById(R.id.new_colaction_btn);
         colaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RelativeLayout sales = (RelativeLayout) findViewById(R.id.sales);
+        RelativeLayout sales = (RelativeLayout) findViewById(R.id.sales_btn);
         sales.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        RelativeLayout club = (RelativeLayout) findViewById(R.id.club);
+        RelativeLayout club = (RelativeLayout) findViewById(R.id.club_btn);
         club.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,9 +68,12 @@ public class MainActivity extends AppCompatActivity {
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+                startActivity(intent);
             }
         });
+
+
 
 
     }

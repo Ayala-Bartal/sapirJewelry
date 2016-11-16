@@ -22,16 +22,18 @@
         android:background="@color/wite">
 
         <ImageView
-            android:layout_width="@dimen/logo_widht"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="3"
             android:src="@drawable/sapir_logo_card"
             android:id="@+id/imageView"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"/>
 
         <ImageView
-            android:layout_width="@dimen/logo_widht"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:src="@drawable/sapir_card1_clipped_rev_1"
             android:id="@+id/imageView6" />
 
@@ -39,10 +41,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="0.05">
         <View
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/line_size"
+            android:layout_height="match_parent"
             android:background="@color/black" />
     </LinearLayout>
 
@@ -57,49 +60,61 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="horizontal"
-            android:gravity="center"
+            android:baselineAligned="false"
             android:layout_weight="2">
 
             <RelativeLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:id="@+id/shop_btn">
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/dimond1" />
+                android:id="@+id/club_btn"
+                android:layout_weight="2"
+                android:layout_margin="25dp"
+                android:layout_gravity="bottom">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="חנות אינטרנטית"
-                    android:textSize="@dimen/texr_size"
-                    android:layout_gravity="center"
+                    android:text="מועדון לקוחות"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
-                    android:layout_centerHorizontal="true"/>
+                    android:id="@+id/text1"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dimond1"
+                    android:layout_centerInParent="true"
+                    android:layout_below="@id/text1"/>
 
             </RelativeLayout>
 
-           <RelativeLayout
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:id="@+id/new_colaction">
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/new_colaction_btn"
+                android:layout_weight="2"
+                android:layout_margin="25dp"
+                android:layout_gravity="bottom">
 
-               <ImageView
-                   android:layout_width="150dp"
-                   android:layout_height="150dp"
-                   android:src="@drawable/dimond1" />
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="קולקציה חדשה"
-                   android:textSize="@dimen/texr_size"
-                   android:textColor="@color/black"
-                   android:layout_gravity="center"
-                   android:layout_centerHorizontal="true"/>
-           </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="קולקציה חדשה"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:id="@+id/text2"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dimond1"
+                    android:layout_centerInParent="true"
+                   android:layout_below="@id/text2"/>
+            </RelativeLayout>
 
 
         </LinearLayout>
@@ -115,12 +130,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
-                android:id="@+id/sales">
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/dimond1" />
+                android:id="@+id/sales_btn"
+                android:layout_weight="2"
+                android:layout_margin="25dp"
+                android:layout_gravity="bottom">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -131,32 +144,50 @@
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"/>
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dimond1"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/imageView3" />
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/club">
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/dimond1" />
+                android:id="@+id/shop_btn"
+                android:layout_weight="2"
+                android:layout_margin="25dp"
+                android:layout_gravity="bottom">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="מועדון לקוחות"
+                    android:text="חנות"
                     android:textSize="@dimen/texr_size"
                     android:textColor="@color/black"
                     android:layout_gravity="center"
                     android:layout_centerHorizontal="true"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/dimond1"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/imageView2" />
 
             </RelativeLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -193,14 +224,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="תפריט"
-            android:textSize="@dimen/texr_size"
+            android:textSize="20dp"
             android:textColor="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="צור קשר"
-            android:textSize="@dimen/texr_size"
+            android:textSize="20dp"
             android:textColor="@color/black"
             android:layout_marginLeft="@dimen/margin_left"/>
     </LinearLayout>

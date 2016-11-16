@@ -43,7 +43,7 @@ public class NewColectionActivity extends AppCompatActivity{
         return recyclerView;
     }
     private void putUserInView (){
-        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi("http://192.168.1.7:8082/");
+        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi("http://192.168.1.106:8082/");
         Call<Collection<Customers>> callback1 = serverUsersApi.getAllUsersNames();
         HttpUrl url = callback1.request().url();
         String strURL = url.toString();

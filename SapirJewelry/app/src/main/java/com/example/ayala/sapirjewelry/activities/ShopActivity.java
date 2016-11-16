@@ -57,7 +57,7 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void putShopsInView() {
-        ServerShopAPiI serverShopAPiI = SapirFactory.createShopsApi("http://192.168.1.7:8082/");
+        ServerShopAPiI serverShopAPiI = SapirFactory.createShopsApi("http:// 192.168.1.106:8082/");
         Call<Collection<Shop>> callback1 = serverShopAPiI.getAllShopNames();
         callback1.enqueue(getShopsCallBack());
     }
@@ -94,7 +94,7 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void getImage(final Shop shop, final Collection<Shop> lstShop) {
-        String pathName = "http://192.168.1.7:8082/";
+        String pathName = "http:// 192.168.1.106:8082/";
         ServerShopAPiI service = SapirFactory.createShopsApi(pathName);
         Call<ResponseBody> call = service.getImageDetails(shop.getName());
         String strUrl = call.request().url().toString();
