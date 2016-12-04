@@ -1,8 +1,11 @@
 package com.example.ayala.sapirjewelry.activities;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -32,8 +35,10 @@ public class RegisterActivity extends AppCompatActivity {
     EditText familyName;
     EditText phoneNumber;
     EditText emailAddress;
-    TextView birthday;
-    TextView weddingDate;
+    EditText gender;
+    EditText city;
+    EditText birthday;
+    EditText weddingDate;
     ServerUsersAPiI serverUsersApi;
 
     @Override
@@ -41,42 +46,51 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
 
-        firstName = (EditText) findViewById(R.id.input_first_name);
+        firstName = (EditText) findViewById(R.id.ed_first_name);
 
-        familyName = (EditText) findViewById(R.id.input_family_name);
+        familyName = (EditText) findViewById(R.id.ed_last_name);
 
-        phoneNumber = (EditText) findViewById(R.id.input_phone_number);
+        phoneNumber = (EditText) findViewById(R.id.ed_phone);
 
-        emailAddress = (EditText) findViewById(R.id.input_email_address);
+        emailAddress = (EditText) findViewById(R.id.ed_email);
 
-        birthday = (TextView) findViewById(R.id.input_birthday);
+        city = (EditText)findViewById(R.id.ed_city);
 
-        weddingDate = (TextView) findViewById(R.id.input_wedding_date);
+        gender = (EditText)findViewById(R.id.ed_gender);
+        gender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getGenderDialog(gender);
+            }
+        });
 
-        serverUsersApi = SapirFactory.createUsersApi("http:// 192.168.1.106:8082/");
-
-
-        Button bithday_btn = (Button) findViewById(R.id.birtday_btn);
-        bithday_btn.setOnClickListener(new View.OnClickListener() {
+        birthday = (EditText) findViewById(R.id.ed_birthday);
+        birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 getCalender(birthday);
             }
         });
 
-        Button wedding_day_btn = (Button) findViewById(R.id.wedding_date_btn);
-        wedding_day_btn.setOnClickListener(new View.OnClickListener() {
+        weddingDate = (EditText) findViewById(R.id.ed_wedding_date);
+        weddingDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getCalender(weddingDate);
             }
         });
 
-        Button register_btn = (Button) findViewById(R.id.register_btn);
+        serverUsersApi = SapirFactory.createUsersApi("http://192.168.100.226:8082/");
+
+        Button register_btn = (Button) findViewById(R.id.ed_register_btn);
         register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Customers customer = getCustomerFromInput();
                 sendCustomerToServer(customer);
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+               toast("נרשמת בהצלחה למועדון הלקוחות");
             }
         });
 
@@ -96,7 +110,21 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }, year, month, day);
         dpd.show();
+    }
 
+    private void getGenderDialog (final TextView result){
+        final CharSequence gender[] = new CharSequence[] {"זכר","נקבה"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setItems(gender, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String curnet =  gender[which].toString();
+                result.setText(curnet);
+                toast(curnet);
+            }
+        });
+        builder.show();
     }
     private Customers getCustomerFromInput (){
         Customers customer = new Customers();
@@ -106,17 +134,14 @@ public class RegisterActivity extends AppCompatActivity {
         customer.setEmail(emailAddress.getText().toString());
         customer.setBirthday(birthday.getText().toString());
         customer.setWeddingDate(weddingDate.getText().toString());
+        customer.setGender(gender.getText().toString());
+        customer.setCity(city.getText().toString());
         return  customer;
 
     }
     private void sendCustomerToServer(Customers customer){
         Call<Customers> executer = serverUsersApi.postUser(customer);
         executer.enqueue(getCreateCustemerCallBack());
-        try {
-            executer.execute();
-        } catch (Exception e) {
-            toast(e.getMessage());
-        }
     }
 
     private Callback getCreateCustemerCallBack(){

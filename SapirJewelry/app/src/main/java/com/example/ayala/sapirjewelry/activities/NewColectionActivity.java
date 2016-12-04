@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.example.ayala.sapirjewelry.adapters.CustomersAdapter;
+import com.example.ayala.sapirjewelry.api.MyApplication;
 import com.example.ayala.sapirjewelry.entities.Customers;
 import com.example.ayala.sapirjewelry.R;
 import com.example.ayala.sapirjewelry.api.SapirFactory;
@@ -43,7 +44,7 @@ public class NewColectionActivity extends AppCompatActivity{
         return recyclerView;
     }
     private void putUserInView (){
-        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi("http://192.168.1.106:8082/");
+        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi("http://192.168.100.226:8082/");
         Call<Collection<Customers>> callback1 = serverUsersApi.getAllUsersNames();
         HttpUrl url = callback1.request().url();
         String strURL = url.toString();

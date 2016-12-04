@@ -24,18 +24,18 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:src="@drawable/sapir_card1_clipped_rev_1"
+            android:id="@+id/imageView6" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="3"
             android:src="@drawable/sapir_logo_card"
             android:id="@+id/imageView"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"/>
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:src="@drawable/sapir_card1_clipped_rev_1"
-            android:id="@+id/imageView6" />
 
     </LinearLayout>
 
@@ -69,17 +69,20 @@
         android:layout_weight="1.5"
         android:orientation="horizontal"
         android:gravity="center">
-        <ImageView
-            android:layout_width="@dimen/hose_width"
-            android:layout_height="@dimen/phone_size"
-            android:src="@drawable/house"
-            android:id="@+id/home" />
+
         <ImageView
             android:layout_width="@dimen/hose_width"
             android:layout_height="match_parent"
             android:src="@drawable/phone"
             android:layout_marginLeft="@dimen/margin_left"
             android:id="@+id/conact"/>
+
+        <ImageView
+            android:layout_width="@dimen/hose_width"
+            android:layout_height="@dimen/phone_size"
+            android:src="@drawable/house"
+            android:id="@+id/home" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -93,16 +96,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="תפריט"
-            android:textSize="20dp"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="צור קשר"
             android:textSize="20dp"
             android:textColor="@color/black"
             android:layout_marginLeft="@dimen/margin_left"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="תפריט"
+            android:textSize="20dp"
+            android:textColor="@color/black" />
+
     </LinearLayout>
 </LinearLayout>

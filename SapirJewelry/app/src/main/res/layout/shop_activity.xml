@@ -16,38 +16,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="@dimen/margin">
+        android:background="@color/wite">
 
         <ImageView
-            android:layout_width="@dimen/logo_widht"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:src="@drawable/sapir_card_logo"
-            android:id="@+id/imageView" />
+            android:layout_weight="3"
+            android:src="@drawable/sapir_logo_card"
+            android:id="@+id/imageView"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"/>
 
         <ImageView
-            android:layout_width="@dimen/logo_widht"
-            android:layout_height="@dimen/logo_height"
-            android:src="@drawable/sapir_card1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:src="@drawable/sapir_card1_clipped_rev_1"
             android:id="@+id/imageView6" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="0.05">
         <View
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/line_size"
+            android:layout_height="match_parent"
             android:background="@color/black" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="11"
+        android:layout_weight="15"
         android:orientation="vertical"
         android:id="@+id/fragment_container">
 
@@ -61,31 +66,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.95"
+        android:layout_weight="1.5"
         android:orientation="horizontal"
         android:gravity="center">
-
-
         <ImageView
             android:layout_width="@dimen/hose_width"
             android:layout_height="@dimen/phone_size"
             android:src="@drawable/house"
             android:id="@+id/home" />
-
         <ImageView
             android:layout_width="@dimen/hose_width"
             android:layout_height="match_parent"
             android:src="@drawable/phone"
             android:layout_marginLeft="@dimen/margin_left"
             android:id="@+id/conact"/>
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/margin"
-        android:layout_weight="0.5"
+        android:layout_weight="1"
         android:orientation="horizontal"
         android:layout_gravity="center">
 
@@ -93,15 +94,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="תפריט"
-            android:textSize="@dimen/texr_size"
-            android:textColor="@color/black"
-            />
+            android:textSize="20dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="צור קשר"
-            android:textSize="@dimen/texr_size"
+            android:textSize="20dp"
             android:textColor="@color/black"
             android:layout_marginLeft="@dimen/margin_left"/>
     </LinearLayout>

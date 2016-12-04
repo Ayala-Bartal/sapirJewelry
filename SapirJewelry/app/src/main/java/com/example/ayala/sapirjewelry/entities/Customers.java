@@ -14,6 +14,16 @@ public class Customers implements Serializable{
     protected String phoneNumber;
     protected String birthday;
     protected String weddingDate;
+    protected String gender;
+    protected String city;
+
+    public String getGender() {return gender;}
+
+    public void setGender(String gender) {this.gender = gender;}
+
+    public String getCity() {return city;}
+
+    public void setCity(String city) {this.city = city;}
 
     public String getFirstName() {
         return firstName;
