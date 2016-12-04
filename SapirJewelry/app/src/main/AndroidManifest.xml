@@ -26,6 +26,7 @@
         <activity android:name=".activities.ContactActivity">
             <category android:name="android.intent.category.LAUNCHER" />
         </activity>
+        <activity android:name=".activities.JewelryActivity"></activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
