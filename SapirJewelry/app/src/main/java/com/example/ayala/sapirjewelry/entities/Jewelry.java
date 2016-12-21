@@ -2,23 +2,27 @@ package com.example.ayala.sapirjewelry.entities;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
+
 /**
  * Created by ayala on 12/4/2016.
  */
 
-public class Jewelry {
+public class Jewelry implements Serializable{
     protected String name;
     protected String picPath;
     protected String price;
     protected Bitmap picView;
     protected String link;
+    protected String type;
 
-    public Jewelry(String name, String picPath, String price, Bitmap picView, String link) {
+    public Jewelry(String name, String picPath, String price, Bitmap picView, String link, String type) {
         this.name = name;
         this.picPath = picPath;
         this.price = price;
         this.picView = picView;
         this.link = link;
+        this.type = type;
     }
 
 
@@ -42,4 +46,8 @@ public class Jewelry {
     public String getPrice() {return price;}
 
     public void setPrice(String price) {this.price = price;}
+
+    public String getType() {return type;}
+
+    public void setType(String type) {this.price = type;}
 }

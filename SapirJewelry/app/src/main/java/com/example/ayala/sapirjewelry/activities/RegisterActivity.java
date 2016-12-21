@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        serverUsersApi = SapirFactory.createUsersApi("http://192.168.100.226:8082/");
+        serverUsersApi = SapirFactory.createUsersApi("http://192.168.100.62:8082/");
 
         Button register_btn = (Button) findViewById(R.id.ed_register_btn);
         register_btn.setOnClickListener(new View.OnClickListener() {

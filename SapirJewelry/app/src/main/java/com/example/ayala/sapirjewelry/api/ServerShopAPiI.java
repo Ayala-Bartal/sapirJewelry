@@ -24,7 +24,7 @@ public interface ServerShopAPiI {
     @GET("/shop/{name}")
     Call<Shop> getUser(@Path("name") String name);
 
-    //	 @FormUrlEncoded
+    //	@FormUrlEncoded
     @POST("/shop/")
     Call<Shop> postUser(@Body Shop shop);
 

@@ -25,6 +25,13 @@ public class SapirFactory {
         return serverShopAPiI;
     }
 
+    public static ServerJewelryAPiI createJewelryApi(String apiUrl) {
+        GsonConverterFactory jsonConverter = GsonConverterFactory.create();
+        Retrofit retrofit  = createRetrofit(apiUrl, jsonConverter);
+        ServerJewelryAPiI serverJewelryAPiI = retrofit.create(ServerJewelryAPiI.class);
+        return serverJewelryAPiI;
+    }
+
     private static Retrofit createRetrofit(String apiUrl, Factory  jsonConverter){
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl(apiUrl);

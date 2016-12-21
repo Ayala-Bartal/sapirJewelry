@@ -5,12 +5,13 @@ import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 /**
  * Created by ayala on 10/23/2016.
  */
 
-public class Shop {
+public class Shop  {
 
     protected String name;
     protected String picPath;

@@ -43,15 +43,10 @@ public class JewelryAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Jewelry jewelry = m_jewelryList.get(position);
         JewelryAdapter.JewelryViewHolder holder1 = (JewelryAdapter.JewelryViewHolder)holder;
-        holder1.nameTextView.setText(m_jewelryList.get(position).getName() + "");
-        holder1.picView.setImageBitmap(m_jewelryList.get(position).getPicView());
-        holder1.priceTextView.setText(m_jewelryList.get(position).getPrice()+ "");
-        holder1.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder1.nameTextView.setText(jewelry.getName());
+        holder1.picView.setImageBitmap(jewelry.getPicView());
+        holder1.priceTextView.setText(jewelry.getPrice());
 
-            }
-        });
     }
 
     @Override
