@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.ayala.sapirjewelry.IpAdrress;
 import com.example.ayala.sapirjewelry.R;
 import com.example.ayala.sapirjewelry.adapters.JewelryAdapter;
 import com.example.ayala.sapirjewelry.api.SapirFactory;
@@ -42,7 +43,7 @@ import retrofit2.Response;
 
 public class JewelryActivity extends AppCompatActivity {
 
-    final String m_serverUrl = "http://192.168.100.62:8082/";
+    String m_ip;
     RecyclerView recyclerView;
     int m_counter = 0;
     String m_j;
@@ -54,6 +55,7 @@ public class JewelryActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jewelery_activity);
+        m_ip = ((IpAdrress)this.getApplication()).getIpAdrress();
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             m_j = extras.getString("Jewelry");
@@ -78,7 +80,7 @@ public class JewelryActivity extends AppCompatActivity {
     }
 
     private void putJewelryInView(String category) {
-        ServerJewelryAPiI serverJewelryAPiI = SapirFactory.createJewelryApi(m_serverUrl);
+        ServerJewelryAPiI serverJewelryAPiI = SapirFactory.createJewelryApi(m_ip);
         Call<Collection<Jewelry>> call = serverJewelryAPiI.getJewelriesByCategory(category);
         String strUrl = call.request().url().toString();
         call.enqueue(getJewelryCallBack());
@@ -116,7 +118,7 @@ public class JewelryActivity extends AppCompatActivity {
     }
 
     private void getImage(final Jewelry jewelry, final Collection<Jewelry> lstJewelry) {
-        ServerJewelryAPiI service = SapirFactory.createJewelryApi(m_serverUrl);
+        ServerJewelryAPiI service = SapirFactory.createJewelryApi(m_ip);
         Call<ResponseBody> call = service.getImageDetails(jewelry.getName());
         String strUrl = call.request().url().toString();
         call.enqueue(getImageCallback(jewelry, lstJewelry));

@@ -7,6 +7,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.ayala.sapirjewelry.IpAdrress;
 import com.example.ayala.sapirjewelry.adapters.CustomersAdapter;
 import com.example.ayala.sapirjewelry.entities.Customers;
 import com.example.ayala.sapirjewelry.R;
@@ -27,10 +28,12 @@ import retrofit2.Response;
 
 public class NewColectionActivity extends AppCompatActivity{
     RecyclerView recyclerView;
+    String m_ip;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_colection_activity);
+        m_ip = ((IpAdrress)this.getApplication()).getIpAdrress();
         recyclerView =getRecylerView();
         putUserInView();
         getCallBack();
@@ -43,7 +46,7 @@ public class NewColectionActivity extends AppCompatActivity{
         return recyclerView;
     }
     private void putUserInView (){
-        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi("http://192.168.100.62:8082/");
+        ServerUsersAPiI serverUsersApi = SapirFactory.createUsersApi(m_ip);
         Call<Collection<Customers>> callback1 = serverUsersApi.getAllUsersNames();
         HttpUrl url = callback1.request().url();
         String strURL = url.toString();
@@ -77,6 +80,8 @@ public class NewColectionActivity extends AppCompatActivity{
     private void toast (String text){
         Toast.makeText(NewColectionActivity.this, text, Toast.LENGTH_LONG).show();
     }
+
+
 }
 
 

@@ -10,6 +10,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.ayala.sapirjewelry.IpAdrress;
 import com.example.ayala.sapirjewelry.adapters.ShopAdapter;
 import com.example.ayala.sapirjewelry.api.SapirFactory;
 import com.example.ayala.sapirjewelry.api.ServerShopAPiI;
@@ -44,8 +46,8 @@ import retrofit2.Response;
 
 public class ShopActivity extends AppCompatActivity {
 
-    final String m_serverUrl= "http://192.168.100.62:8082/";
     RecyclerView recyclerView;
+    String m_ip;
     int m_counter = 0;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -56,6 +58,7 @@ public class ShopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        m_ip = ((IpAdrress)this.getApplication()).getIpAdrress();
         setContentView(R.layout.shop_activity);
         recyclerView = getRecylerView();
         putShopsInView();
@@ -73,7 +76,7 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void putShopsInView() {
-        ServerShopAPiI serverShopAPiI = SapirFactory.createShopsApi(m_serverUrl);
+        ServerShopAPiI serverShopAPiI = SapirFactory.createShopsApi(m_ip);
         Call<Collection<Shop>> callback1 = serverShopAPiI.getAllShopNames();
         callback1.enqueue(getShopsCallBack());
     }
@@ -110,7 +113,7 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     private void getImage(final Shop shop, final Collection<Shop> lstShop) {
-        ServerShopAPiI service = SapirFactory.createShopsApi(m_serverUrl);
+        ServerShopAPiI service = SapirFactory.createShopsApi(m_ip);
         Call<ResponseBody> call = service.getImageDetails(shop.getName());
         String strUrl = call.request().url().toString();
         call.enqueue(getImageCallback(shop, lstShop));

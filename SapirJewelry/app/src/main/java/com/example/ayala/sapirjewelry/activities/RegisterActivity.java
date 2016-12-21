@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ayala.sapirjewelry.IpAdrress;
 import com.example.ayala.sapirjewelry.entities.Customers;
 import com.example.ayala.sapirjewelry.R;
 import com.example.ayala.sapirjewelry.api.SapirFactory;
@@ -40,11 +41,14 @@ public class RegisterActivity extends AppCompatActivity {
     EditText birthday;
     EditText weddingDate;
     ServerUsersAPiI serverUsersApi;
+    String m_ip;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
+
+        m_ip = ((IpAdrress)this.getApplication()).getIpAdrress();
 
         firstName = (EditText) findViewById(R.id.ed_first_name);
 
@@ -80,7 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        serverUsersApi = SapirFactory.createUsersApi("http://192.168.100.62:8082/");
+        serverUsersApi = SapirFactory.createUsersApi(m_ip);
 
         Button register_btn = (Button) findViewById(R.id.ed_register_btn);
         register_btn.setOnClickListener(new View.OnClickListener() {

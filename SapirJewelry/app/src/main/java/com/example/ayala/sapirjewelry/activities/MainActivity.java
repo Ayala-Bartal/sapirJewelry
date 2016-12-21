@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.example.ayala.sapirjewelry.IpAdrress;
 import com.example.ayala.sapirjewelry.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
        RelativeLayout shop = (RelativeLayout) findViewById(R.id.shop_btn);
         shop.setOnClickListener(new View.OnClickListener() {
